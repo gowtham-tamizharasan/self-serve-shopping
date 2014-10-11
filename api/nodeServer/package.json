@@ -1,0 +1,9 @@
+{
+  "name": "simple-app",
+  "description": "a simple api that talks to mongp",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "3.x",
+    "mongodb": "*"
+  }
+}
