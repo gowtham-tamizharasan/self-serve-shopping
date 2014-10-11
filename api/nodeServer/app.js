@@ -33,5 +33,6 @@ http.createServer(app).listen(app.get('port'), function(){
 });
 
 
-app.get('/api', api.index);
+app.get('/api/generateSession', api.index);
+app.post('/api/sessionShop', api.shop);
 app.get('/qr', qr.generate);
