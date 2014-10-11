@@ -13,17 +13,19 @@ exports.index = function(req, res){
 };
 
 exports.shop = function(req, res){
-	var sessionId=req.param('session');
-	console.log("product---->",req.param('product'),req.param('session'),req);
-	var productDetails=JSON.parse(req.param('product'));
+	var productDetails=JSON.parse(req.body.product);
+	console.log("product---->",productDetails);
+	var sessionId=req.body.session;
 	MongoClient.connect('mongodb://127.0.0.1:27017/session', function(err, db) {
 	    if(err) throw err;
 	    var collection = db.collection('session');
-	 	collection.update({"_id":sessionId},productDetails, function(err, docs) {
+	    console.log("sessionId---->",parseInt(sessionId));
+	 	collection.update({"_id":parseInt(sessionId)},{"$set":{"purchase":productDetails} }, function(err, docs) {
+
 	 		if(!err){
 	 			res.send("Success");	
 	 		}else{
-	 			res.send("Fail");
+	 			res.send("Fail--> "+err);
 	 		}
 	    });
   	})
